@@ -1,3 +1,53 @@
+<?php
+
+$conn=new mysqli('localhost','root','','project');
+
+if($conn->connect_error)
+{
+  die("Connection failed".$conn->connect_error);
+}
+else
+{
+
+  if(isset($_POST['insertBtn']))
+  {
+    $marks_id=$_POST['marks_id'];
+    $student_id=$_POST['student_id'];
+    $sub_id=$_POST['sub_id'];
+    $marks=$_POST['marks'];
+
+    $sql="INSERT into marks_info VALUE ('$marks_id','$student_id','$sub_id','$marks')";
+    $execute=$conn->query($sql);
+  }
+
+
+
+  if(isset($_POST['updateBtn']))
+   {
+    $marks_id = $_POST['marks_id'];
+    $student_id = $_POST['student_id'];
+    $sub_id = $_POST['sub_id'];
+    $marks = $_POST['marks'];
+    
+    $sql = "UPDATE marks_info SET marks_id='$marks_id', student_id='$student_id',marks='$marks',sub_id='$sub_id' WHERE marks_id='$marks_id'";
+    $execute = $conn->query($sql);
+  }
+  
+
+
+  if(isset($_POST['deleteBtn']))
+  {
+    $marks_id=$_POST['marks_id'];
+    $student_id=$_POST['student_id'];
+    $sub_id=$_POST['sub_id'];
+    $marks=$_POST['marks'];
+
+    $sql="DELETE FROM marks_info WHERE marks_id='$marks_id'";
+    $execute=$conn->query($sql);
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

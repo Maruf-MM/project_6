@@ -1,3 +1,46 @@
+<?php
+
+$conn=new mysqli('localhost','root','','project');
+
+if($conn->connect_error)
+{
+  die("Connection failed".$conn->connect_error);
+}
+else
+{
+
+  if(isset($_POST['insertBtn']))
+  {
+    $institute_id=$_POST['institute_id'];
+    $institute_name=$_POST['institute_name'];
+
+    $sql="INSERT into institute_info VALUE ('$institute_id','$institute_name')";
+    $execute=$conn->query($sql);
+  }
+
+
+
+  if(isset($_POST['updateBtn'])) {
+    $institute_id = $_POST['institute_id'];
+    $institute_name = $_POST['institute_name'];
+ 
+    $sql = "UPDATE institute_info SET institute_name='$institute_name' WHERE institute_id='$institute_id'";
+    $execute = $conn->query($sql);
+  }
+  
+
+
+  if(isset($_POST['deleteBtn']))
+  {
+    $institute_id=$_POST['institute_id'];
+    $institute_name=$_POST['institute_name'];
+
+    $sql="DELETE FROM institute_info WHERE institute_id='$institute_id'";
+    $execute=$conn->query($sql);
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +100,8 @@
   <div class="container">
     <h1>Institute Information</h1>
     <form action="" method="POST">
-      <input type="text" name="instituteID" placeholder="Institute ID" required>
-      <input type="text" name="instituteName" placeholder="Institute Name" required>
+      <input type="text" name="institute_id" placeholder="Institute ID" required>
+      <input type="text" name="institute_name" placeholder="Institute Name" required>
       <div class="button-container">
         <input type="submit" name="insertBtn" value="Insert">
         <input type="submit" name="updateBtn" value="Update">

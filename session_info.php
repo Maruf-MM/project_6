@@ -1,3 +1,45 @@
+<?php
+
+$conn=new mysqli('localhost','root','','project');
+
+if($conn->connect_error)
+{
+  die("Connection failed".$conn->connect_error);
+}
+else
+{
+
+  if(isset($_POST['insertBtn']))
+  {
+    $session_id=$_POST['session_id'];
+    $session_name=$_POST['session_name'];
+
+    $sql="INSERT into session_info VALUE ('$session_id','$session_name')";
+    $execute=$conn->query($sql);
+  }
+
+
+
+  if(isset($_POST['updateBtn'])) {
+    $session_id = $_POST['session_id'];
+    $session_name = $_POST['session_name'];
+ 
+    $sql = "UPDATE session_info SET session_id='$session_id',session_name='$session_name' WHERE session_id='$session_id'";
+    $execute = $conn->query($sql);
+  }
+  
+
+
+  if(isset($_POST['deleteBtn']))
+  {
+    $session_id=$_POST['session_id'];
+    $session_name=$_POST['session_name'];
+  
+    $sql="DELETE FROM session_info WHERE session_id='$session_id'";
+    $execute=$conn->query($sql);
+  }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +99,8 @@
   <div class="container">
     <h1>Session Information</h1>
     <form action="" method="POST">
-      <input type="text" name="sessionID" placeholder="Session ID" required>
-      <input type="text" name="sessionName" placeholder="Session Name" required>
+      <input type="text" name="session_id" placeholder="Session ID" required>
+      <input type="text" name="session_name" placeholder="Session Name" required>
       <div class="button-container">
         <input type="submit" name="insertBtn" value="Insert">
         <input type="submit" name="updateBtn" value="Update">

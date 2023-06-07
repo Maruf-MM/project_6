@@ -11,26 +11,28 @@ else
 
   if(isset($_POST['insertBtn']))
   {
-    $subject_id=$_POST['subject_id'];
-    $subject_name=$_POST['subject_name'];
-    $subject_code=$_POST['subject_code'];
-    $semester_id=$_POST['semester_id'];
-    $total_marks=$_POST['total_marks'];
+    $enrollment_id=$_POST['enrollment_id'];
+    $student_id=$_POST['student_id'];
+    $date=$_POST['date'];
+    $year=$_POST['year'];
+    $semester=$_POST['semester'];
+    $status=$_POST['status'];
 
-    $sql="INSERT into subject_info VALUE ('$subject_id','$subject_name',$subject_code,$semester_id,'$total_marks')";
+    $sql="INSERT into student_enrollment_info VALUE ('$enrollment_id','$student_id',$date,$year,$semester,'$status')";
     $execute=$conn->query($sql);
   }
 
 
 
   if(isset($_POST['updateBtn'])) {
-    $subject_id = $_POST['subject_id'];
-    $subject_name = $_POST['subject_name'];
-    $subject_code = $_POST['subject_code'];
-    $semester_id = $_POST['semester_id'];
-    $total_marks = $_POST['total_marks'];
+    $enrollment_id = $_POST['enrollment_id'];
+    $student_id = $_POST['student_id'];
+    $date = $_POST['date'];
+    $year = $_POST['year'];
+    $semester = $_POST['semester'];
+    $status = $_POST['status'];
     
-    $sql = "UPDATE subject_info SET subject_name='$subject_name', subject_code='$subject_code', semester_id='$semester_id',total_marks=$total_marks WHERE subject_id='$subject_id'";
+    $sql = "UPDATE student_enrollment_info SET student_id='$student_id', date='$date', year='$year', semester='$semester', status='$status' WHERE enrollment_id='$enrollment_id'";
     $execute = $conn->query($sql);
   }
   
@@ -38,22 +40,24 @@ else
 
   if(isset($_POST['deleteBtn']))
   {
-    $subject_id=$_POST['subject_id'];
-    $subject_name=$_POST['subject_name'];
-    $subject_code=$_POST['subject_code'];
-    $semester_id=$_POST['semester_id'];
-    $total_marks=$_POST['total_marks'];
+    $enrollment_id=$_POST['enrollment_id'];
+    $student_id=$_POST['student_id'];
+    $date=$_POST['date'];
+    $year=$_POST['year'];
+    $semester=$_POST['semester'];
+    $status=$_POST['status'];
 
-    $sql="DELETE FROM subject_info WHERE subject_id='$subject_id'";
+    $sql="DELETE FROM student_enrollment_info WHERE enrollment_id='$enrollment_id'";
     $execute=$conn->query($sql);
   }
+
+
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Subject Information</title>
+  <title>Student Enrollment Page</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -75,7 +79,7 @@ else
     }
 
     input[type="text"],
-    input[type="number"],
+    input[type="date"],
     select {
       width: 100%;
       padding: 10px;
@@ -98,28 +102,32 @@ else
     input[type="submit"]:hover {
       background-color: #45a049;
     }
-    
+
     .button-container {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
     }
-    
+
     .button-container input[type="submit"] {
-      flex-grow: 1;
-      margin-right: 5px;
+      width: 30%;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Subject Information</h1>
+    <h1>Student Enrollment</h1>
     <form action="" method="POST">
-      <input type="text" name="subject_id" placeholder="Subject ID" required>
-      <input type="text" name="subject_name" placeholder="Subject Name" required>
-      <input type="text" name="subject_code" placeholder="Subject Code" required>
-      <input type="text" name="semester_id" placeholder="Semester ID" required>
-      <input type="number" name="total_marks" placeholder="Total Marks" required>
+      <input type="text" name="enrollment_id" placeholder="Enrollment ID" required>
+      <input type="text" name="student_id" placeholder="Student ID" required>
+      <input type="text" name="semester" placeholder="Semester" required>
+      <input type="date" name="date" required>
+      <input type="text" name="year" placeholder="Year" required>
+      <select name="status" required>
+        <option value="" disabled selected>Select Status</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+        <option value="pending">Pending</option>
+      </select>
       <div class="button-container">
         <input type="submit" name="insertBtn" value="Insert">
         <input type="submit" name="updateBtn" value="Update">

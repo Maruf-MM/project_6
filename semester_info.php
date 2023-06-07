@@ -1,3 +1,48 @@
+<?php
+
+$conn=new mysqli('localhost','root','','project');
+
+if($conn->connect_error)
+{
+  die("Connection failed".$conn->connect_error);
+}
+else
+{
+
+  if(isset($_POST['insertBtn']))
+  {
+    $semester_id=$_POST['semester_id'];
+    $semester_name=$_POST['semester_name'];
+    $dept_id=$_POST['dept_id'];
+
+    $sql="INSERT into semester_info VALUE ('$semester_id','$semester_name',$dept_id)";
+    $execute=$conn->query($sql);
+  }
+
+
+
+  if(isset($_POST['updateBtn'])) {
+    $semester_id = $_POST['semester_id'];
+    $semester_name = $_POST['semester_name'];
+    $dept_id=$_POST['dept_id'];
+ 
+    $sql = "UPDATE semester_info SET semester_name='$semester_name',dept_id='$dept_id' WHERE semester_id='$semester_id'";
+    $execute = $conn->query($sql);
+  }
+  
+
+
+  if(isset($_POST['deleteBtn']))
+  {
+    $semester_id=$_POST['semester_id'];
+    $semester_name=$_POST['semester_name'];
+    $dept_id=$_POST['dept_id'];
+    $sql="DELETE FROM semester_info WHERE semester_id='$semester_id'";
+    $execute=$conn->query($sql);
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +102,9 @@
   <div class="container">
     <h1>Semester Information</h1>
     <form action="" method="POST">
-      <input type="text" name="semesterName" placeholder="Semester Name" required>
-      <input type="text" name="departmentID" placeholder="Department ID" required>
+      <input type="text" name="semester_id" placeholder="Semester ID" required>
+      <input type="text" name="semester_name" placeholder="Semester Name" required>
+      <input type="text" name="dept_id" placeholder="Department ID" required>
       <div class="button-container">
         <input type="submit" name="insertBtn" value="Insert">
         <input type="submit" name="updateBtn" value="Update">

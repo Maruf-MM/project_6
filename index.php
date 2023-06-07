@@ -10,9 +10,9 @@ else
   if(isset($_POST['login']))
   {
      $user_name=$_POST['user_name'];
-     $user_password=$_POST['user_password'];
+     $user_password=$_POST['password'];
 
-     $Qretrive="SELECT * FROM user_info where user_name='$user_name'and user_password='$user_password'";
+     $Qretrive="SELECT * FROM user_info where user_name='$user_name'and password='$user_password'";
      $retriveQ=$conn->query($Qretrive);
 
      if($retriveQ)
@@ -95,7 +95,7 @@ else
     <h1>User Login</h1>
     <form action="" method="POST">
       <input type="text" name="user_name" placeholder="Username" required>
-      <input type="password" name="user_password" placeholder="Password" required>
+      <input type="password" name="password" placeholder="Password" required>
       <input type="submit" name="login" value="Login">
     </form>
     <div class="register-link">
